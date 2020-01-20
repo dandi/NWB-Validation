@@ -25,6 +25,8 @@
 
   <!-- LZString compression library - Used to create direct links to the demo - NOT REQUIRED for JSON Editor -->
   <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+
+  <script src="js-yaml.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -586,7 +588,9 @@
       });
 
       $export_text_button.addEventListener("click", function() {
-        download(document.getElementById("output").value, "validated.json", "application/json");
+        const obj = JSON.parse(document.getElementById("output").value);
+        const yaml = jsyaml.safeDump(obj);
+        download(yaml, "validated.yaml", "text/yaml");
       });
 
       // Update the schema when the button is clicked
